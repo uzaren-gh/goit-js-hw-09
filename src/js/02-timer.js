@@ -15,6 +15,7 @@ const options = {
 const starT = document.querySelector('button[data-start]');
 starT.disabled = true;
 // document.querySelector("#datetime-picker").value = "2024-01-01 00:00:00";
+// лорлр
 
 flatpickr('#datetime-picker', options);
 
