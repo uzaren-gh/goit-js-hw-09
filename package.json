@@ -4,7 +4,8 @@
   "description": "",
   "homepage": "https://uzaren-gh.github.io/goit-js-hw-09",
   "scripts": {
-    "start": "parcel src/*.html",
+    "start": "parcel --open chrome src/*.html",
+    "dev": "parcel src/index.html",
     "build": "parcel build src/*.html --public-url /goit-js-hw-09/"
   },
   "repository": {

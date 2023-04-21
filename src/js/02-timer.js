@@ -1,18 +1,33 @@
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
+// import 'flatpickr/dist/flatpickr.min.css';
+// import 'flatpickr/dist/themes/dark.css';
+import { Russian } from 'flatpickr/dist/l10n/ru.js';
+require('flatpickr/dist/themes/dark.css');
 
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  allowInput: true,
+  locale: Russian,
+
   onClose(selectedDates) {
     console.log(selectedDates[0]);
+    console.log(options.defaultDate);
+    if (selectedDates[0] < options.defaultDate) {
+      starT.disabled = true;
+      return alert('Please, choose a date in the FUTURE!');
+    }
     startFunction();
   },
 };
 
 const starT = document.querySelector('button[data-start]');
+document.querySelector('body').style.background =
+  'linear-gradient(0deg, #EECFBA, #C5DDE8)';
+document.querySelector('#datetime-picker').textContent = '';
+
 starT.disabled = true;
 // document.querySelector("#datetime-picker").value = "2024-01-01 00:00:00";
 
@@ -39,6 +54,7 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
   return { days, hours, minutes, seconds };
 }
 
