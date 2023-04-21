@@ -3,6 +3,15 @@ import flatpickr from 'flatpickr';
 // import 'flatpickr/dist/themes/dark.css';
 import { Russian } from 'flatpickr/dist/l10n/ru.js';
 require('flatpickr/dist/themes/dark.css');
+import Notiflix from 'notiflix';
+Notiflix.Notify.init({
+  position: 'center-top',
+  width: '480px',
+  fontSize: '25px',
+  fontFamily: 'Roboto',
+  clickToClose: true,
+  timeout: 3000,
+});
 
 const options = {
   enableTime: true,
@@ -17,7 +26,8 @@ const options = {
     console.log(options.defaultDate);
     if (selectedDates[0] < options.defaultDate) {
       starT.disabled = true;
-      return alert('Please, choose a date in the FUTURE!');
+      return Notiflix.Notify.warning('Please, choose a date in the FUTURE!');
+      // alert('Please, choose a date in the FUTURE!');
     }
     startFunction();
   },
