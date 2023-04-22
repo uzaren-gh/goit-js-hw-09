@@ -22,8 +22,8 @@ const options = {
   locale: Russian,
 
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
-    console.log(options.defaultDate);
+    // console.log(selectedDates[0]);
+    // console.log(options.defaultDate);
     if (selectedDates[0] < options.defaultDate) {
       starT.disabled = true;
       return Notiflix.Notify.warning('Please, choose a date in the FUTURE!');
@@ -68,14 +68,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// console.log("date:", date);
-
-// const specifiedDate = new Date("2024-01-01 00:00:00");
-
-// console.log(specifiedDate.getTime());
-
-// const specifiedDate = dataFromInput;
-
 function countdown() {
   starT.textContent = 'Stop';
   starT.removeEventListener('click', countdown);
@@ -87,13 +79,17 @@ function countdown() {
   });
 
   let dateNow = new Date(),
-    // date = specifiedDate.getTime() - dateNow.getTime(),
     date = specifiedDate - dateNow.getTime(),
     timeout = 0;
 
   let { days, hours, minutes, seconds } = convertMs(date);
 
-  if (date <= 0) return alert('Please choose a date in the future!');
+  if (date <= 0)
+    return Notiflix.Report.success(
+      'Countdown is done.',
+      'Please choose a new date (in the future).',
+      'Ok'
+    );
 
   document.querySelector('span[data-days]').innerHTML = days;
 
