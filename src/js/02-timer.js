@@ -23,7 +23,6 @@ const options = {
 
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
-    // console.log(options.defaultDate);
     if (selectedDates[0] < options.defaultDate) {
       starT.disabled = true;
       return Notiflix.Notify.warning('Please, choose a date in the FUTURE!');
@@ -39,16 +38,15 @@ document.querySelector('body').style.background =
 document.querySelector('#datetime-picker').textContent = '';
 
 starT.disabled = true;
-// document.querySelector("#datetime-picker").value = "2024-01-01 00:00:00";
 
 flatpickr('#datetime-picker', options);
 
 function startFunction() {
   starT.disabled = false;
   starT.textContent = 'Start';
+  starT.style.background = 'green';
   starT.addEventListener('click', countdown);
 }
-// startFunction();
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -68,8 +66,17 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+//функция приведения к формату "XX"
+function addLeadingZero(obj) {
+  for (let key in obj) {
+    obj[key] = String(obj[key]).padStart(2, '0');
+  }
+  return obj;
+}
+
 function countdown() {
   starT.textContent = 'Stop';
+  starT.style.background = 'red';
   starT.removeEventListener('click', countdown);
   const dataFromInput = document.querySelector('#datetime-picker').value;
   let specifiedDate = Date.parse(dataFromInput);
@@ -82,7 +89,7 @@ function countdown() {
     date = specifiedDate - dateNow.getTime(),
     timeout = 0;
 
-  let { days, hours, minutes, seconds } = convertMs(date);
+  let { days, hours, minutes, seconds } = addLeadingZero(convertMs(date));
 
   if (date <= 0)
     return Notiflix.Report.success(
@@ -93,13 +100,13 @@ function countdown() {
 
   document.querySelector('span[data-days]').innerHTML = days;
 
-  if (hours < 10) hours = '0' + hours;
+  // if (hours < 10) hours = '0' + hours; // можно обойтись без функции приведения к "XX"
   document.querySelector('span[data-hours]').innerHTML = hours;
 
-  if (minutes < 10) minutes = '0' + minutes;
+  // if (minutes < 10) minutes = '0' + minutes;
   document.querySelector('span[data-minutes]').innerHTML = minutes;
 
-  if (seconds < 10) seconds = '0' + seconds;
+  // if (seconds < 10) seconds = '0' + seconds;
   document.querySelector('span[data-seconds]').innerHTML = seconds;
 
   timeout = setTimeout(countdown, 1000);

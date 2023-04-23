@@ -28,7 +28,6 @@ function handleSubmit(event) {
   event.preventDefault();
   const { delay, step, amount } = event.currentTarget;
   inputedDelay = Number(delay.value);
-  console.log('inputedDelay:', inputedDelay);
   inputedStep = Number(step.value);
   inputedAmount = Number(amount.value);
 
