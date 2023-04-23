@@ -9,8 +9,8 @@ function getRandomHexColor() {
 let timeout = 0;
 
 startButton.addEventListener('click', startColorChange);
-startButton.classList = 'btn';
-stopButton.classList = 'btn';
+// startButton.classList = 'btn';
+// stopButton.classList = 'btn';
 
 stopButton.addEventListener('click', stopColorChange);
 

@@ -34,7 +34,8 @@ const options = {
 
 const starT = document.querySelector('button[data-start]');
 document.querySelector('body').style.background =
-  'linear-gradient(0deg, #EECFBA, #C5DDE8)';
+  '-webkit-linear-gradient(top, #d6a5cc 100px, #C5DDE8 300px) no-repeat, #C5DDE8';
+// 'linear-gradient(10deg, #d6a5cc, #C5DDE8)';
 document.querySelector('#datetime-picker').textContent = '';
 
 starT.disabled = true;
@@ -44,7 +45,7 @@ flatpickr('#datetime-picker', options);
 function startFunction() {
   starT.disabled = false;
   starT.textContent = 'Start';
-  starT.style.background = 'green';
+  starT.style.background = '#74d4a1';
   starT.addEventListener('click', countdown);
 }
 
@@ -76,7 +77,7 @@ function addLeadingZero(obj) {
 
 function countdown() {
   starT.textContent = 'Stop';
-  starT.style.background = 'red';
+  starT.style.background = '#d66060';
   starT.removeEventListener('click', countdown);
   const dataFromInput = document.querySelector('#datetime-picker').value;
   let specifiedDate = Date.parse(dataFromInput);
