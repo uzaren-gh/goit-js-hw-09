@@ -41,6 +41,7 @@ document.querySelector('#datetime-picker').textContent = '';
 starT.disabled = true;
 
 flatpickr('#datetime-picker', options);
+
 function startFunction() {
   starT.disabled = false;
   starT.textContent = 'Start';
