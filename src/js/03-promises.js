@@ -62,7 +62,8 @@ function handleSubmit(event) {
 
     inputedDelay += inputedStep;
   }
+  // event.currentTarget.reset(); //дополнительная очистка формы после выполнения промисов
   setTimeout(() => {
-    submiT.disabled = false;
+    submiT.disabled = false; //кнопка запуска активизируется вновь только после выполнения промисов
   }, inputedDelay);
 }
