@@ -82,33 +82,40 @@ function countdown() {
   const dataFromInput = document.querySelector('#datetime-picker').value;
   let specifiedDate = Date.parse(dataFromInput);
   starT.addEventListener('click', () => {
-    clearTimeout(timeout);
+    // clearTimeout(timeout);
+    clearInterval(timeout);
     startFunction();
   });
 
-  let dateNow = new Date(),
-    date = specifiedDate - dateNow.getTime(),
-    timeout = 0;
+  let timeout = 0;
 
-  let { days, hours, minutes, seconds } = addLeadingZero(convertMs(date));
+  timeout = setInterval(() => {
+    //с этого места повтор действий каждую 1 секунду
+    let dateNow = new Date(),
+      date = specifiedDate - dateNow.getTime();
 
-  if (date <= 0)
-    return Notiflix.Report.success(
-      'Countdown is done.',
-      'Please choose a new date (in the future).',
-      'Ok'
-    );
+    let { days, hours, minutes, seconds } = addLeadingZero(convertMs(date));
 
-  document.querySelector('span[data-days]').innerHTML = days;
+    if (date <= 0) {
+      clearInterval(timeout);
+      return Notiflix.Report.success(
+        'Countdown is done.',
+        'Please choose a new date (in the future).',
+        'Ok'
+      );
+    }
 
-  // if (hours < 10) hours = '0' + hours; // можно обойтись без функции приведения к "XX"
-  document.querySelector('span[data-hours]').innerHTML = hours;
+    document.querySelector('span[data-days]').innerHTML = days;
 
-  // if (minutes < 10) minutes = '0' + minutes;
-  document.querySelector('span[data-minutes]').innerHTML = minutes;
+    // if (hours < 10) hours = '0' + hours; // можно обойтись без функции приведения к "XX"
+    document.querySelector('span[data-hours]').innerHTML = hours;
 
-  // if (seconds < 10) seconds = '0' + seconds;
-  document.querySelector('span[data-seconds]').innerHTML = seconds;
+    // if (minutes < 10) minutes = '0' + minutes;
+    document.querySelector('span[data-minutes]').innerHTML = minutes;
 
-  timeout = setTimeout(countdown, 1000);
+    // if (seconds < 10) seconds = '0' + seconds;
+    document.querySelector('span[data-seconds]').innerHTML = seconds;
+  }, 1000);
+
+  // timeout = setTimeout(countdown, 1000);
 }

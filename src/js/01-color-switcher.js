@@ -18,15 +18,19 @@ startButton.addEventListener('click', startColorChange);
 stopButton.addEventListener('click', stopColorChange);
 
 function startColorChange() {
-  bodY.style.backgroundColor = getRandomHexColor();
   startButton.disabled = true;
   stopButton.disabled = false;
-  timeout = setTimeout(startColorChange, 1000);
-  console.log('timeout:', timeout);
+  timeout = setInterval(
+    () => (bodY.style.backgroundColor = getRandomHexColor()),
+    1000
+  );
+  // timeout = setTimeout(startColorChange, 1000);
+  // console.log('timeout:', timeout);
 }
 
 function stopColorChange() {
-  clearTimeout(timeout);
+  // clearTimeout(timeout);
+  clearInterval(timeout);
   startButton.disabled = false;
   stopButton.disabled = true;
 }
